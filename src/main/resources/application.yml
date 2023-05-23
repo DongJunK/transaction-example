@@ -1,11 +1,23 @@
 spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/transaction_example?serverTimezone=UTC&characterEncoding=UTF-8
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:test
     username: root
-    password: saficket
+    password: password
   jpa:
-    database: mysql
-    show-sql: true
-    hibernate:
-      ddl-auto: none
+    database-platform: org.hibernate.dialect.H2Dialect
+
+logging:
+  level:
+    org:
+      hibernate:
+        engine:
+          transaction:
+            internal: TRACE
+      springframework:
+        orm: TRACE
+        transaction: TRACE
